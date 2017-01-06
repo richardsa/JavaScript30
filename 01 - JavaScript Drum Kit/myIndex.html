@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <audio data-key="65" src="sounds/clap.wav"></audio>
+  <audio id="aKey" data-key="65" src="sounds/clap.wav"></audio>
   <audio data-key="83" src="sounds/hihat.wav"></audio>
   <audio data-key="68" src="sounds/kick.wav"></audio>
   <audio data-key="70" src="sounds/openhat.wav"></audio>
@@ -58,24 +58,30 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
-  function removeTransition(e) {
-    if (e.propertyName !== 'transform') return;
-    e.target.classList.remove('playing');
-  }
+document.onkeyup = function (e) {
+    e = e || window.event;
+    var code = e.keyCode;
+    if(code === 65) {
+      console.log('yeahbru');
+      document.getElementById('aKey').play();
+      var element = document.querySelectorAll('[data-key="65"]');
+      element[0].style.backgroundColor = "red";
+      element[0].classList.add("playing");
+    }
+    console.log("yea" + code);
+    switch(code) {
+    case (code == 65):
+        console.log('yeahbruh')
+        break;
+    case "n":
+        console.log('nawbruh')
+        break;
+    default:
+        console.log(e)
+}
 
-  function playSound(e) {
-    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    if (!audio) return;
-
-    key.classList.add('playing');
-    audio.currentTime = 0;
-    audio.play();
-  }
-
-  const keys = Array.from(document.querySelectorAll('.key'));
-  keys.forEach(key => key.addEventListener('transitionend', removeTransition));
-  window.addEventListener('keydown', playSound);
+    // use e.keyCode
+};
 </script>
 
 
