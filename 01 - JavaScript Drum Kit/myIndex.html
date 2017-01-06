@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <audio id="aKey" data-key="65" src="sounds/clap.wav"></audio>
+  <audio data-key="65" src="sounds/clap.wav"></audio>
   <audio data-key="83" src="sounds/hihat.wav"></audio>
   <audio data-key="68" src="sounds/kick.wav"></audio>
   <audio data-key="70" src="sounds/openhat.wav"></audio>
@@ -58,30 +58,42 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+var dataKeys = [65,83,68,70,71,72,74,75,76];
+document.onkeydown = function (e) {
+
+
+    e = e || window.event;
+    var code = e.keyCode;
+    if(dataKeys.indexOf(code) > -1) {
+      var element = document.querySelectorAll('[data-key="'+code+'"]');
+      // Used the following for restarting audio
+      // delay in playing some of the sounds without applying
+      if (window.HTMLAudioElement) {
+          try {
+              var oAudio = document.querySelectorAll('[data-key="'+code+'"]');
+              element[1].currentTime = 0;
+          }
+          catch (e) {
+              // Fail silently but show in F12 developer tools console
+               if(window.console && console.error("Error:" + e));
+         }
+      }
+      element[0].classList.add("playing");
+      element[1].play();
+    }
+
+};
+
 document.onkeyup = function (e) {
     e = e || window.event;
     var code = e.keyCode;
-    if(code === 65) {
-      console.log('yeahbru');
-      document.getElementById('aKey').play();
-      var element = document.querySelectorAll('[data-key="65"]');
-      element[0].style.backgroundColor = "red";
-      element[0].classList.add("playing");
+    if(dataKeys.indexOf(code) > -1) {
+      var element = document.querySelectorAll('[data-key="'+code+'"]');
+      element[0].classList.remove("playing");
     }
-    console.log("yea" + code);
-    switch(code) {
-    case (code == 65):
-        console.log('yeahbruh')
-        break;
-    case "n":
-        console.log('nawbruh')
-        break;
-    default:
-        console.log(e)
-}
 
-    // use e.keyCode
 };
+
 </script>
 
 
