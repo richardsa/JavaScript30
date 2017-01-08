@@ -61,11 +61,67 @@
       background:black;
       position: absolute;
       top:50%;
+    
+      transform-origin: top right;
+
     }
 
   </style>
 
   <script>
+
+
+  var minutePos = function(min){
+    var pos = 0;
+    if(min >= 45 && min < 61){
+      pos = (min - 45) * 6;
+    } else {
+      pos = 90 + (min * 6);
+    }
+    return pos;
+  }
+
+  var secondPos = function(sec){
+    var pos = 0;
+    if(sec >= 45 && sec < 61){
+      pos = (sec - 45) * 6;
+    } else {
+      pos = 90 + (sec * 6);
+    }
+    return pos;
+  };
+
+  var hourPos = function (hour){
+    if (hour > 12){
+      hour = hour - 12;
+    }
+
+    if(hour >= 9 && hour < 13){
+      pos = (hour - 9) * 30;
+    } else {
+      pos = 90 + (hour * 30);
+    }
+  };
+
+  setInterval(function(){
+    // your code..
+    var now = new Date();
+
+    var seconds = now.getSeconds();
+    var minutes = now.getMinutes();
+    var hour = now.getHours();
+    hourPos(hour);
+    var sec = secondPos(seconds);
+    var min = secondPos(minutes);
+    var hour2 = hourPos(hour);
+    var hours =     document.getElementsByClassName('hour-hand');
+    hours[0].style.transform =    'rotate('+ hour2 + 'deg)';
+    var mins =     document.getElementsByClassName('min-hand');
+    mins[0].style.transform =    'rotate('+ min + 'deg)';
+    var secs =     document.getElementsByClassName('second-hand');
+    secs[0].style.transform =    'rotate('+ sec + 'deg)';
+  }, 1000);
+
 
 
   </script>

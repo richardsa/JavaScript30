@@ -60,8 +60,6 @@
 <script>
 var dataKeys = [65,83,68,70,71,72,74,75,76];
 document.onkeydown = function (e) {
-
-
     e = e || window.event;
     var code = e.keyCode;
     if(dataKeys.indexOf(code) > -1) {
@@ -81,7 +79,6 @@ document.onkeydown = function (e) {
       element[0].classList.add("playing");
       element[1].play();
     }
-
 };
 
 document.onkeyup = function (e) {
