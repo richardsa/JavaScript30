@@ -2,4 +2,4 @@
 
 # JavaScript30
 
-My take on JavaScript30
+My take on JavaScript30.
